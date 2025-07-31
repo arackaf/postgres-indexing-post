@@ -1,5 +1,5 @@
 // History Book Title Generator
-// Generates large amounts of unique book titles through combinatorial arrays
+// Generates large amounts of unique book titles through systematic combinations
 
 // Title prefixes and formats (50 items)
 const prefixes = [
@@ -481,71 +481,19 @@ const suffixes = [
   "Untold Tales",
 ];
 
-// Function to generate a single random title
-function generateRandomTitle(): string {
-  const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-
-  // Randomly choose between different combination patterns
-  const patterns = [
-    () => {
-      // Pattern 1: Prefix + Historical Figure + Time Period
-      const figure = historicalFigures[Math.floor(Math.random() * historicalFigures.length)];
-      const period = timePeriods[Math.floor(Math.random() * timePeriods.length)];
-      return `${prefix} ${figure} in ${period}`;
-    },
-    () => {
-      // Pattern 2: Prefix + Historical Event + Region
-      const event = historicalEvents[Math.floor(Math.random() * historicalEvents.length)];
-      const region = regions[Math.floor(Math.random() * regions.length)];
-      return `${prefix} ${event} in ${region}`;
-    },
-    () => {
-      // Pattern 3: Prefix + Theme + Suffix
-      const theme = themes[Math.floor(Math.random() * themes.length)];
-      const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
-      return `${prefix} ${theme}: ${suffix}`;
-    },
-    () => {
-      // Pattern 4: Prefix + Region + Time Period
-      const region = regions[Math.floor(Math.random() * regions.length)];
-      const period = timePeriods[Math.floor(Math.random() * timePeriods.length)];
-      return `${prefix} ${region} During ${period}`;
-    },
-    () => {
-      // Pattern 5: Simple combination
-      const figure = historicalFigures[Math.floor(Math.random() * historicalFigures.length)];
-      return `${prefix} ${figure}`;
-    },
-  ];
-
-  const randomPattern = patterns[Math.floor(Math.random() * patterns.length)];
-  return randomPattern();
-}
-
-// Function to generate multiple unique titles
-function generateUniqueHistoryTitles(count: number): string[] {
-  const titles = new Set<string>();
-  let attempts = 0;
-  const maxAttempts = count * 10; // Prevent infinite loops
-
-  while (titles.size < count && attempts < maxAttempts) {
-    const title = generateRandomTitle();
-    titles.add(title);
-    attempts++;
-  }
-
-  return Array.from(titles);
-}
-
-// Function to generate all possible combinations (warning: this could be millions of titles)
-function generateAllCombinations(): string[] {
+// Function to generate all titles systematically
+function generateAllTitles(): string[] {
   const allTitles: string[] = [];
 
-  // Generate all combinations of Pattern 1: Prefix + Figure + Time Period
-  for (const prefix of prefixes) {
-    for (const figure of historicalFigures) {
-      for (const period of timePeriods) {
-        allTitles.push(`${prefix} ${figure} in ${period}`);
+  console.log("Generating titles...");
+
+  // Combined loop for all categories
+  for (const arr of [historicalFigures, historicalEvents, timePeriods, regions, themes]) {
+    for (const prefix of prefixes) {
+      for (const item of arr) {
+        for (const suffix of suffixes) {
+          allTitles.push(`${prefix} ${item}: ${suffix}`);
+        }
       }
     }
   }
@@ -553,53 +501,26 @@ function generateAllCombinations(): string[] {
   return allTitles;
 }
 
-// Calculate maximum possible unique combinations
-function calculateMaxCombinations(): number {
-  // Pattern 1: prefixes × figures × periods = 50 × 100 × 60 = 300,000
-  // Pattern 2: prefixes × events × regions = 50 × 80 × 70 = 280,000
-  // Pattern 3: prefixes × themes × suffixes = 50 × 50 × 40 = 100,000
-  // Pattern 4: prefixes × regions × periods = 50 × 70 × 60 = 210,000
-  // Pattern 5: prefixes × figures = 50 × 100 = 5,000
-  // Total theoretical max: 895,000+ unique combinations
+// Generate all titles
+const allTitles = generateAllTitles();
 
-  const pattern1 = prefixes.length * historicalFigures.length * timePeriods.length;
-  const pattern2 = prefixes.length * historicalEvents.length * regions.length;
-  const pattern3 = prefixes.length * themes.length * suffixes.length;
-  const pattern4 = prefixes.length * regions.length * timePeriods.length;
-  const pattern5 = prefixes.length * historicalFigures.length;
-
-  return pattern1 + pattern2 + pattern3 + pattern4 + pattern5;
-}
-
-// Example usage:
-console.log(`Maximum possible combinations: ${calculateMaxCombinations().toLocaleString()}`);
-console.log("\nGenerating 10 sample titles:");
-const sampleTitles = generateUniqueHistoryTitles(10);
-sampleTitles.forEach((title, index) => {
+console.log(`\nGenerated ${allTitles.length.toLocaleString()} total titles!`);
+console.log("\nFirst 50 titles:");
+allTitles.slice(0, 50).forEach((title, index) => {
   console.log(`${index + 1}. ${title}`);
 });
 
-console.log("\nGenerating 100 titles to show variety:");
-const hundredTitles = generateUniqueHistoryTitles(100);
-console.log(`Generated ${hundredTitles.length} unique titles`);
-console.log("First 20:");
-hundredTitles.slice(0, 20).forEach((title, index) => {
-  console.log(`${index + 1}. ${title}`);
+console.log(`\n... and ${(allTitles.length - 50).toLocaleString()} more titles!`);
+console.log("\nLast 10 titles:");
+allTitles.slice(-10).forEach((title, index) => {
+  console.log(`${allTitles.length - 10 + index + 1}. ${title}`);
 });
 
-// Comment out the export for now to run as a script
-/*
-export {
-  prefixes,
-  historicalFigures,
-  historicalEvents,
-  timePeriods,
-  regions,
-  themes,
-  suffixes,
-  generateRandomTitle,
-  generateUniqueHistoryTitles,
-  generateAllCombinations,
-  calculateMaxCombinations,
-};
-*/
+// Show breakdown by category
+console.log("\nBreakdown by category:");
+console.log(`Figure-based titles: ${(prefixes.length * historicalFigures.length * suffixes.length).toLocaleString()}`);
+console.log(`Event-based titles: ${(prefixes.length * historicalEvents.length * suffixes.length).toLocaleString()}`);
+console.log(`Period-based titles: ${(prefixes.length * timePeriods.length * suffixes.length).toLocaleString()}`);
+console.log(`Region-based titles: ${(prefixes.length * regions.length * suffixes.length).toLocaleString()}`);
+console.log(`Theme-based titles: ${(prefixes.length * themes.length * suffixes.length).toLocaleString()}`);
+console.log(`Total: ${allTitles.length.toLocaleString()}`);
