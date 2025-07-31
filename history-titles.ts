@@ -1,13 +1,11 @@
 // History Book Title Generator
 // Generates large amounts of unique book titles through systematic combinations
 
-// Title prefixes and formats (50 items)
 const prefixes = [
   "The Complete History of",
   "A Biography of",
   "The Rise and Fall of",
   "Chronicles of",
-  "The Secret History of",
   "Memoirs of",
   "The Life and Times of",
   "The Story of",
@@ -24,10 +22,6 @@ const prefixes = [
   "The Battle for",
   "The War of",
   "The Revolution of",
-  "The Empire of",
-  "The Kingdom of",
-  "The Republic of",
-  "The Dynasty of",
   "Masters of",
   "Heroes of",
   "Villains of",
@@ -36,22 +30,8 @@ const prefixes = [
   "The Lost",
   "The Hidden",
   "The Great",
-  "The Magnificent",
-  "The Terrible",
   "The Brave",
   "The Wise",
-  "The Mad",
-  "The First",
-  "The Last",
-  "Blood and",
-  "Fire and",
-  "Steel and",
-  "Crown and",
-  "Sword and",
-  "Faith and",
-  "Honor and",
-  "Power and",
-  "Glory and",
   "Shadows of",
 ];
 
@@ -383,60 +363,6 @@ const regions = [
   "The Spice Route",
 ];
 
-// Themes and subjects (50 items)
-const themes = [
-  "War and Peace",
-  "Love and Betrayal",
-  "Power and Corruption",
-  "Faith and Doubt",
-  "Honor and Shame",
-  "Freedom and Slavery",
-  "Civilization and Barbarism",
-  "Order and Chaos",
-  "Tradition and Progress",
-  "East and West",
-  "Rich and Poor",
-  "King and Commoner",
-  "Master and Servant",
-  "Sacred and Profane",
-  "Life and Death",
-  "Hope and Despair",
-  "Victory and Defeat",
-  "Rise and Fall",
-  "Creation and Destruction",
-  "Unity and Division",
-  "Politics",
-  "Religion",
-  "Culture",
-  "Economics",
-  "Military",
-  "Diplomacy",
-  "Trade",
-  "Exploration",
-  "Discovery",
-  "Innovation",
-  "Art",
-  "Science",
-  "Philosophy",
-  "Literature",
-  "Architecture",
-  "Medicine",
-  "Agriculture",
-  "Technology",
-  "Navigation",
-  "Warfare",
-  "Conquest",
-  "Empire",
-  "Revolution",
-  "Reform",
-  "Renaissance",
-  "Enlightenment",
-  "Colonization",
-  "Immigration",
-  "Slavery",
-  "Abolition",
-];
-
 // Suffixes and endings (40 items)
 const suffixes = [
   "A Historical Analysis",
@@ -488,7 +414,7 @@ function generateAllTitles(): string[] {
   console.log("Generating titles...");
 
   // Combined loop for all categories
-  for (const arr of [historicalFigures, historicalEvents, timePeriods, regions, themes]) {
+  for (const arr of [historicalFigures, historicalEvents, timePeriods, regions]) {
     for (const prefix of prefixes) {
       for (const item of arr) {
         for (const suffix of suffixes) {
@@ -501,26 +427,16 @@ function generateAllTitles(): string[] {
   return allTitles;
 }
 
+console.log("Prefixes: " + prefixes.length);
+console.log("Historical Figures: " + historicalFigures.length);
+console.log("Historical Events: " + historicalEvents.length);
+console.log("Time Periods: " + timePeriods.length);
+console.log("Regions: " + regions.length);
+console.log("Suffixes: " + suffixes.length);
+
+const allTotalCount = prefixes.length * (historicalFigures.length + historicalEvents.length + timePeriods.length + regions.length) * suffixes.length;
+
+console.log("All Total Count: " + allTotalCount);
+
 // Generate all titles
-const allTitles = generateAllTitles();
-
-console.log(`\nGenerated ${allTitles.length.toLocaleString()} total titles!`);
-console.log("\nFirst 50 titles:");
-allTitles.slice(0, 50).forEach((title, index) => {
-  console.log(`${index + 1}. ${title}`);
-});
-
-console.log(`\n... and ${(allTitles.length - 50).toLocaleString()} more titles!`);
-console.log("\nLast 10 titles:");
-allTitles.slice(-10).forEach((title, index) => {
-  console.log(`${allTitles.length - 10 + index + 1}. ${title}`);
-});
-
-// Show breakdown by category
-console.log("\nBreakdown by category:");
-console.log(`Figure-based titles: ${(prefixes.length * historicalFigures.length * suffixes.length).toLocaleString()}`);
-console.log(`Event-based titles: ${(prefixes.length * historicalEvents.length * suffixes.length).toLocaleString()}`);
-console.log(`Period-based titles: ${(prefixes.length * timePeriods.length * suffixes.length).toLocaleString()}`);
-console.log(`Region-based titles: ${(prefixes.length * regions.length * suffixes.length).toLocaleString()}`);
-console.log(`Theme-based titles: ${(prefixes.length * themes.length * suffixes.length).toLocaleString()}`);
-console.log(`Total: ${allTitles.length.toLocaleString()}`);
+//const allTitles = generateAllTitles();
