@@ -5,6 +5,7 @@ import { generateAllTitles } from "./history-titles";
 import { newAuthor } from "./names";
 import { db } from "../drizzle/db";
 import { books, publishers } from "../drizzle/schema";
+import { BookInserter } from "./book-inserter";
 
 function generateRandomISBN(): string {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -36,21 +37,12 @@ export async function fillDatabase() {
     name: "Large History Publisher",
   });
 
-  let totalBooksInserted = 0;
-  const booksToInsert: InferInsertModel<typeof books>[] = [];
+  const bookInserter = new BookInserter();
 
   const titles = generateAllTitles();
 
-  async function flushBooks() {
-    await db.insert(books).values(booksToInsert);
-    totalBooksInserted += booksToInsert.length;
-
-    console.log(`Total books inserted: ${totalBooksInserted.toLocaleString()}`);
-    booksToInsert.length = 0;
-  }
-
   for (const title of titles) {
-    booksToInsert.push({
+    await bookInserter.add({
       isbn: generateRandomISBN(),
       author: newAuthor(),
       title: title,
@@ -60,14 +52,8 @@ export async function fillDatabase() {
       hasActivePromotion: false,
       eligibleForPromotion: false,
     });
-
-    if (booksToInsert.length === 50) {
-      await flushBooks();
-    }
   }
-  if (booksToInsert.length) {
-    await flushBooks();
-  }
+  await bookInserter.flush();
 }
 
 fillDatabase();
