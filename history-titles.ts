@@ -450,10 +450,12 @@ async function generateAllTitles(): Promise<void> {
   for (const arr of [historicalFigures, historicalEvents, timePeriods, regions]) {
     for (const prefix of prefixes) {
       for (const item of arr) {
-        for (const suffix of suffixes) {
-          const title = `${prefix} ${item}: ${suffix}`;
+        const booksToInsert = [];
 
-          await db.insert(books).values({
+        for (let i = 0; i < suffixes.length; i++) {
+          const title = `${prefix} ${item}: ${suffixes[i]}`;
+
+          booksToInsert.push({
             isbn: generateRandomISBN(),
             title: title,
             publisher: 1,
@@ -463,6 +465,9 @@ async function generateAllTitles(): Promise<void> {
             eligibleForPromotion: false,
           });
         }
+
+        // Batch insert all books for this prefix + item combination
+        await db.insert(books).values(booksToInsert);
       }
     }
   }
