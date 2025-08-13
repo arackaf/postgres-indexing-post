@@ -1,8 +1,8 @@
 // History Book Title Generator
 // Generates large amounts of unique book titles through systematic combinations
 
-import { db } from "./drizzle/db";
-import { books, publishers } from "./drizzle/schema";
+import { db } from "../drizzle/db";
+import { books, publishers } from "../drizzle/schema";
 
 const prefixes = [
   "The Complete History of",
