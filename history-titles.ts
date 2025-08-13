@@ -446,6 +446,8 @@ async function generateAllTitles(): Promise<void> {
     name: "Large History Publisher",
   });
 
+  let totalBooksInserted = 0;
+
   // Combined loop for all categories
   for (const arr of [historicalFigures, historicalEvents, timePeriods, regions]) {
     for (const prefix of prefixes) {
@@ -466,8 +468,10 @@ async function generateAllTitles(): Promise<void> {
           });
         }
 
-        // Batch insert all books for this prefix + item combination
         await db.insert(books).values(booksToInsert);
+        totalBooksInserted += booksToInsert.length;
+
+        console.log(`Total books inserted: ${totalBooksInserted.toLocaleString()}`);
       }
     }
   }
