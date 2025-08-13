@@ -14,6 +14,7 @@ CREATE TABLE publishers (
 CREATE TABLE books (
     id SERIAL PRIMARY KEY,  -- auto-incrementing primary key
     isbn VARCHAR(20) NOT NULL,
+    author VARCHAR(255) NOT NULL,
     title VARCHAR(500) NOT NULL,
     publisher INT NOT NULL REFERENCES publishers(id),  -- foreign key to publishers
     publication_date DATE NOT NULL,
