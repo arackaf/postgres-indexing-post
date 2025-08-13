@@ -435,16 +435,4 @@ async function generateAllTitles(): Promise<string[]> {
   return allTitles;
 }
 
-console.log("Prefixes: " + prefixes.length);
-console.log("Historical Figures: " + historicalFigures.length);
-console.log("Historical Events: " + historicalEvents.length);
-console.log("Time Periods: " + timePeriods.length);
-console.log("Regions: " + regions.length);
-console.log("Suffixes: " + suffixes.length);
-
-const allTotalCount = prefixes.length * (historicalFigures.length + historicalEvents.length + timePeriods.length + regions.length) * suffixes.length;
-
-console.log("All Total Count: " + allTotalCount);
 generateAllTitles();
-// Generate all titles
-//const allTitles = generateAllTitles();
