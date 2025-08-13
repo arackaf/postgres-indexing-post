@@ -1,4 +1,4 @@
-import { pgTable, integer, varchar, foreignKey, serial, date, boolean, check } from "drizzle-orm/pg-core";
+import { pgTable, integer, varchar, foreignKey, serial, date, boolean } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
 export const publishers = pgTable("publishers", {
@@ -11,6 +11,7 @@ export const books = pgTable(
   {
     id: serial().primaryKey().notNull(),
     isbn: varchar({ length: 20 }).notNull(),
+    author: varchar({ length: 255 }).notNull(),
     title: varchar({ length: 500 }).notNull(),
     publisher: integer().notNull(),
     publicationDate: date("publication_date").notNull(),
@@ -24,24 +25,5 @@ export const books = pgTable(
       foreignColumns: [publishers.id],
       name: "books_publisher_fkey",
     }),
-  ]
-);
-
-export const activePromotions = pgTable(
-  "active_promotions",
-  {
-    id: serial().primaryKey().notNull(),
-    name: varchar({ length: 255 }).notNull(),
-    book: integer().notNull(),
-    startDate: date("start_date").notNull(),
-    endDate: date("end_date").notNull(),
-  },
-  (table) => [
-    foreignKey({
-      columns: [table.book],
-      foreignColumns: [books.id],
-      name: "active_promotions_book_fkey",
-    }),
-    check("valid_promotion_dates", sql`end_date >= start_date`),
   ]
 );
