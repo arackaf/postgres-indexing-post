@@ -1,11 +1,6 @@
 // History Book Title Generator
 // Generates large amounts of unique book titles through systematic combinations
 
-import { InferInsertModel } from "drizzle-orm";
-import { db } from "../drizzle/db";
-import { books, publishers } from "../drizzle/schema";
-import { newAuthor } from "./names";
-
 const prefixes = [
   "The Complete History of",
   "A Biography of",
@@ -412,74 +407,15 @@ const suffixes = [
   "Untold Tales",
 ];
 
-// Helper function to generate random ISBN (10 letters)
-function generateRandomISBN(): string {
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let isbn = "";
-  for (let i = 0; i < 10; i++) {
-    isbn += letters.charAt(Math.floor(Math.random() * letters.length));
-  }
-  return isbn;
-}
-
-// Helper function to generate random pages between 100-700
-function generateRandomPages(): number {
-  return Math.floor(Math.random() * (700 - 100 + 1)) + 100;
-}
-
-// Helper function to generate random publication date (30 years ago to 1 year in future)
-function generateRandomPublicationDate(): string {
-  const now = new Date();
-  const thirtyYearsAgo = new Date(now.getFullYear() - 30, now.getMonth(), now.getDate());
-  const oneYearFuture = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
-
-  const randomTime = thirtyYearsAgo.getTime() + Math.random() * (oneYearFuture.getTime() - thirtyYearsAgo.getTime());
-
-  const randomDate = new Date(randomTime);
-  return randomDate.toISOString().split("T")[0]; // Return YYYY-MM-DD format
-}
-
-// Function to generate all titles systematically
-async function generateAllTitles(): Promise<void> {
-  console.log("Generating titles and inserting books...");
-
-  await db.insert(publishers).values({
-    id: 1,
-    name: "Large History Publisher",
-  });
-
-  let totalBooksInserted = 0;
-
+export function* generateAllTitles(): IterableIterator<string> {
   // Combined loop for all categories
   for (const arr of [historicalFigures, historicalEvents, timePeriods, regions]) {
     for (const prefix of prefixes) {
       for (const item of arr) {
-        const booksToInsert: InferInsertModel<typeof books>[] = [];
-
-        for (let i = 0; i < suffixes.length; i++) {
-          const title = `${prefix} ${item}: ${suffixes[i]}`;
-
-          booksToInsert.push({
-            isbn: generateRandomISBN(),
-            author: newAuthor(),
-            title: title,
-            publisher: 1,
-            publicationDate: generateRandomPublicationDate(),
-            pages: generateRandomPages(),
-            hasActivePromotion: false,
-            eligibleForPromotion: false,
-          });
+        for (const suffix of suffixes) {
+          yield `${prefix} ${item}: ${suffix}`;
         }
-
-        await db.insert(books).values(booksToInsert);
-        totalBooksInserted += booksToInsert.length;
-
-        console.log(`Total books inserted: ${totalBooksInserted.toLocaleString()}`);
       }
     }
   }
-
-  console.log("Finished inserting all books!");
 }
-
-generateAllTitles();
