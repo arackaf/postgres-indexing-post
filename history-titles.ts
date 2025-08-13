@@ -410,11 +410,36 @@ const suffixes = [
   "Untold Tales",
 ];
 
-// Function to generate all titles systematically
-async function generateAllTitles(): Promise<string[]> {
-  const allTitles: string[] = [];
+// Helper function to generate random ISBN (10 letters)
+function generateRandomISBN(): string {
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let isbn = "";
+  for (let i = 0; i < 10; i++) {
+    isbn += letters.charAt(Math.floor(Math.random() * letters.length));
+  }
+  return isbn;
+}
 
-  console.log("Generating titles...");
+// Helper function to generate random pages between 100-700
+function generateRandomPages(): number {
+  return Math.floor(Math.random() * (700 - 100 + 1)) + 100;
+}
+
+// Helper function to generate random publication date (30 years ago to 1 year in future)
+function generateRandomPublicationDate(): string {
+  const now = new Date();
+  const thirtyYearsAgo = new Date(now.getFullYear() - 30, now.getMonth(), now.getDate());
+  const oneYearFuture = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
+
+  const randomTime = thirtyYearsAgo.getTime() + Math.random() * (oneYearFuture.getTime() - thirtyYearsAgo.getTime());
+
+  const randomDate = new Date(randomTime);
+  return randomDate.toISOString().split("T")[0]; // Return YYYY-MM-DD format
+}
+
+// Function to generate all titles systematically
+async function generateAllTitles(): Promise<void> {
+  console.log("Generating titles and inserting books...");
 
   await db.insert(publishers).values({
     id: 1,
@@ -426,13 +451,23 @@ async function generateAllTitles(): Promise<string[]> {
     for (const prefix of prefixes) {
       for (const item of arr) {
         for (const suffix of suffixes) {
-          allTitles.push(`${prefix} ${item}: ${suffix}`);
+          const title = `${prefix} ${item}: ${suffix}`;
+
+          await db.insert(books).values({
+            isbn: generateRandomISBN(),
+            title: title,
+            publisher: 1,
+            publicationDate: generateRandomPublicationDate(),
+            pages: generateRandomPages(),
+            hasActivePromotion: false,
+            eligibleForPromotion: false,
+          });
         }
       }
     }
   }
 
-  return allTitles;
+  console.log("Finished inserting all books!");
 }
 
 generateAllTitles();
