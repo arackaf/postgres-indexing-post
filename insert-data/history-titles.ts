@@ -1,8 +1,8 @@
 // History Book Title Generator
 // Generates large amounts of unique book titles through systematic combinations
 
-import { db } from "./drizzle/db";
-import { books, publishers } from "./drizzle/schema";
+import { db } from "../drizzle/db";
+import { books, publishers } from "../drizzle/schema";
 
 const prefixes = [
   "The Complete History of",
@@ -452,7 +452,7 @@ async function generateAllTitles(): Promise<void> {
   for (const arr of [historicalFigures, historicalEvents, timePeriods, regions]) {
     for (const prefix of prefixes) {
       for (const item of arr) {
-        const booksToInsert = [];
+        const booksToInsert = [] as any[];
 
         for (let i = 0; i < suffixes.length; i++) {
           const title = `${prefix} ${item}: ${suffixes[i]}`;
