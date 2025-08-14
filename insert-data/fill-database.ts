@@ -71,12 +71,23 @@ export async function fillDatabase() {
   const timelessHistoryBooks = bookCoreGenerator(generateAllHistoryTitles(), [timelessHistoryPublishing]);
   const frontendMastersBooks = bookCoreGenerator(generateAllTechTitles(), [frontendMastersPublishing]);
 
-  for (const title of titles) {
+  const allBookGenerators = [
+    classicBooks,
+    classicAnalysisTitles,
+    historyBooks,
+    miscTitles,
+    cookingTitles,
+    techTitles,
+    timelessHistoryBooks,
+    frontendMastersBooks,
+  ];
+
+  for (const book of classicBooks) {
     await bookInserter.add({
       isbn: generateRandomISBN(),
-      author: newAuthor(),
-      title: title,
-      publisher: 1,
+      author: book.author,
+      title: book.title,
+      publisher: book.publisher,
       publicationDate: generateRandomPublicationDate(),
       pages: generateRandomPages(),
       hasActivePromotion: false,
