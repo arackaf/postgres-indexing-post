@@ -1,10 +1,8 @@
-import { InferInsertModel } from "drizzle-orm";
+import { generateAllTitles } from "./static-data/history-titles";
 
-import { generateAllTitles } from "./history-titles";
-
-import { newAuthor } from "./names";
+import { newAuthor } from "./static-data/names";
 import { db } from "../drizzle/db";
-import { books, publishers } from "../drizzle/schema";
+import { publishers } from "../drizzle/schema";
 import { BookInserter } from "./book-inserter";
 
 function generateRandomISBN(): string {
