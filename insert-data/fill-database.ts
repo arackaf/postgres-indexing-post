@@ -82,18 +82,39 @@ export async function fillDatabase() {
     frontendMastersBooks,
   ];
 
-  for (const book of classicBooks) {
-    await bookInserter.add({
-      isbn: generateRandomISBN(),
-      author: book.author,
-      title: book.title,
-      publisher: book.publisher,
-      publicationDate: generateRandomPublicationDate(),
-      pages: generateRandomPages(),
-      hasActivePromotion: false,
-      eligibleForPromotion: false,
-    });
+  while (allBookGenerators.length) {
+    for (let i = allBookGenerators.length - 1; i >= 0; i--) {
+      const generator = allBookGenerators[i];
+      const randomCount = Math.floor(Math.random() * 10) + 1; // Random number from 1-10 inclusive
+
+      let generatorEmpty = false;
+
+      for (let j = 0; j < randomCount; j++) {
+        const result = generator.next();
+        if (result.done) {
+          generatorEmpty = true;
+          break;
+        }
+
+        const book = result.value;
+        await bookInserter.add({
+          isbn: generateRandomISBN(),
+          author: book.author,
+          title: book.title,
+          publisher: book.publisher,
+          publicationDate: generateRandomPublicationDate(),
+          pages: generateRandomPages(),
+          hasActivePromotion: false,
+          eligibleForPromotion: false,
+        });
+      }
+
+      if (generatorEmpty) {
+        allBookGenerators.splice(i, 1);
+      }
+    }
   }
+
   await bookInserter.flush();
 }
 
