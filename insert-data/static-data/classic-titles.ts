@@ -4,7 +4,6 @@ type ClassicTitle = {
 };
 
 export const classicTitles: ClassicTitle[] = [
-  // Shakespeare
   { title: "Romeo and Juliet", author: "William Shakespeare" },
   { title: "Hamlet", author: "William Shakespeare" },
   { title: "Macbeth", author: "William Shakespeare" },
@@ -16,7 +15,6 @@ export const classicTitles: ClassicTitle[] = [
   { title: "Much Ado About Nothing", author: "William Shakespeare" },
   { title: "As You Like It", author: "William Shakespeare" },
 
-  // American Classics
   { title: "To Kill a Mockingbird", author: "Harper Lee" },
   { title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
   { title: "Of Mice and Men", author: "John Steinbeck" },
@@ -38,7 +36,6 @@ export const classicTitles: ClassicTitle[] = [
   { title: "A Farewell to Arms", author: "Ernest Hemingway" },
   { title: "For Whom the Bell Tolls", author: "Ernest Hemingway" },
 
-  // British Classics
   { title: "Pride and Prejudice", author: "Jane Austen" },
   { title: "Sense and Sensibility", author: "Jane Austen" },
   { title: "Emma", author: "Jane Austen" },
@@ -69,7 +66,6 @@ export const classicTitles: ClassicTitle[] = [
   { title: "Paradise Lost", author: "John Milton" },
   { title: "The Pilgrim's Progress", author: "John Bunyan" },
 
-  // Victorian Literature
   { title: "Tess of the d'Urbervilles", author: "Thomas Hardy" },
   { title: "The Mayor of Casterbridge", author: "Thomas Hardy" },
   { title: "Far from the Madding Crowd", author: "Thomas Hardy" },
@@ -86,7 +82,6 @@ export const classicTitles: ClassicTitle[] = [
   { title: "The Invisible Man", author: "H.G. Wells" },
   { title: "The Island of Dr. Moreau", author: "H.G. Wells" },
 
-  // Russian Literature
   { title: "War and Peace", author: "Leo Tolstoy" },
   { title: "Anna Karenina", author: "Leo Tolstoy" },
   { title: "The Death of Ivan Ilyich", author: "Leo Tolstoy" },
@@ -105,7 +100,6 @@ export const classicTitles: ClassicTitle[] = [
   { title: "Three Sisters", author: "Anton Chekhov" },
   { title: "Uncle Vanya", author: "Anton Chekhov" },
 
-  // French Literature
   { title: "Les Misérables", author: "Victor Hugo" },
   { title: "The Hunchback of Notre-Dame", author: "Victor Hugo" },
   { title: "Madame Bovary", author: "Gustave Flaubert" },
@@ -123,7 +117,6 @@ export const classicTitles: ClassicTitle[] = [
   { title: "Nana", author: "Émile Zola" },
   { title: "L'Assommoir", author: "Émile Zola" },
 
-  // German Literature
   { title: "The Sorrows of Young Werther", author: "Johann Wolfgang von Goethe" },
   { title: "Faust", author: "Johann Wolfgang von Goethe" },
   { title: "Wilhelm Meister's Apprenticeship", author: "Johann Wolfgang von Goethe" },
@@ -136,7 +129,6 @@ export const classicTitles: ClassicTitle[] = [
   { title: "The Castle", author: "Franz Kafka" },
   { title: "America", author: "Franz Kafka" },
 
-  // Spanish Literature
   { title: "Don Quixote", author: "Miguel de Cervantes" },
   { title: "La Celestina", author: "Fernando de Rojas" },
   { title: "Life is a Dream", author: "Pedro Calderón de la Barca" },
@@ -144,13 +136,11 @@ export const classicTitles: ClassicTitle[] = [
   { title: "Blood Wedding", author: "Federico García Lorca" },
   { title: "Yerma", author: "Federico García Lorca" },
 
-  // Italian Literature
   { title: "The Divine Comedy", author: "Dante Alighieri" },
   { title: "The Decameron", author: "Giovanni Boccaccio" },
   { title: "The Prince", author: "Niccolò Machiavelli" },
   { title: "The Betrothed", author: "Alessandro Manzoni" },
 
-  // Ancient Literature
   { title: "The Iliad", author: "Homer" },
   { title: "The Odyssey", author: "Homer" },
   { title: "The Aeneid", author: "Virgil" },
@@ -161,7 +151,6 @@ export const classicTitles: ClassicTitle[] = [
   { title: "Metamorphoses", author: "Ovid" },
   { title: "The Confessions", author: "Augustine of Hippo" },
 
-  // 20th Century Classics
   { title: "1984", author: "George Orwell" },
   { title: "Animal Farm", author: "George Orwell" },
   { title: "Brave New World", author: "Aldous Huxley" },
@@ -181,7 +170,6 @@ export const classicTitles: ClassicTitle[] = [
   { title: "One Hundred Years of Solitude", author: "Gabriel García Márquez" },
   { title: "Love in the Time of Cholera", author: "Gabriel García Márquez" },
 
-  // More American Literature
   { title: "Invisible Man", author: "Ralph Ellison" },
   { title: "Native Son", author: "Richard Wright" },
   { title: "Black Boy", author: "Richard Wright" },
@@ -197,7 +185,6 @@ export const classicTitles: ClassicTitle[] = [
   { title: "The Fire Next Time", author: "James Baldwin" },
   { title: "Giovanni's Room", author: "James Baldwin" },
 
-  // Poetry Collections
   { title: "Leaves of Grass", author: "Walt Whitman" },
   { title: "The Waste Land", author: "T.S. Eliot" },
   { title: "Four Quartets", author: "T.S. Eliot" },
@@ -207,7 +194,6 @@ export const classicTitles: ClassicTitle[] = [
   { title: "The Rime of the Ancient Mariner", author: "Samuel Taylor Coleridge" },
   { title: "Lyrical Ballads", author: "William Wordsworth and Samuel Taylor Coleridge" },
 
-  // Additional World Literature
   { title: "Things Fall Apart", author: "Chinua Achebe" },
   { title: "Arrow of God", author: "Chinua Achebe" },
   { title: "No Longer at Ease", author: "Chinua Achebe" },
@@ -216,3 +202,119 @@ export const classicTitles: ClassicTitle[] = [
   { title: "Kafka on the Shore", author: "Haruki Murakami" },
   { title: "The Wind-Up Bird Chronicle", author: "Haruki Murakami" },
 ];
+
+export const classicTitlePrefixes = [
+  "Analyzing",
+  "Understanding",
+  "Interpreting",
+  "Reading",
+  "Exploring",
+  "Examining",
+  "Studying",
+  "Dissecting",
+  "Deconstructing",
+  "Unpacking",
+  "A Critical Analysis of",
+  "A Close Reading of",
+  "An Examination of",
+  "A Study of",
+  "An Interpretation of",
+  "A Review of",
+  "A Commentary on",
+  "An Introduction to",
+  "A Guide to",
+  "Understanding the Themes of",
+  "The Symbolism in",
+  "The Characters of",
+  "The Meaning Behind",
+  "The Literary Techniques in",
+  "The Historical Context of",
+  "The Social Commentary in",
+  "The Feminist Reading of",
+  "The Marxist Interpretation of",
+  "The Psychoanalytic Reading of",
+  "The Postcolonial Analysis of",
+  "The Cultural Significance of",
+  "The Religious Themes in",
+  "The Political Messages of",
+  "The Philosophical Ideas in",
+  "The Moral Questions in",
+  "Rereading",
+  "Revisiting",
+  "Rediscovering",
+  "Reinterpreting",
+  "New Perspectives on",
+  "Fresh Insights into",
+  "Modern Approaches to",
+  "Contemporary Views of",
+  "21st Century Reading of",
+  "Postmodern Interpretation of",
+  "Feminist Critique of",
+  "Decolonizing",
+  "Contextualizing",
+  "Historicizing",
+];
+
+export const classicTitleSuffixes = [
+  "A Critical Review",
+  "An Academic Analysis",
+  "A Scholarly Examination",
+  "A Literary Study",
+  "A Close Reading",
+  "An In-Depth Analysis",
+  "A Comprehensive Study",
+  "A Critical Commentary",
+  "An Interpretive Guide",
+  "A Reader's Companion",
+  "A Study Guide",
+  "An Academic Commentary",
+  "A Critical Introduction",
+  "A Literary Analysis",
+  "A Thematic Study",
+  "A Character Analysis",
+  "A Symbolic Reading",
+  "A Historical Analysis",
+  "A Cultural Study",
+  "A Social Commentary",
+  "Through Modern Eyes",
+  "In Contemporary Context",
+  "From New Perspectives",
+  "Revisited and Reexamined",
+  "A Fresh Interpretation",
+  "New Critical Essays",
+  "Modern Scholarly Views",
+  "21st Century Perspectives",
+  "Academic Insights",
+  "Critical Reflections",
+  "Scholarly Interpretations",
+  "Literary Criticism",
+  "Academic Essays",
+  "Critical Studies",
+  "Research Perspectives",
+  "Analytical Essays",
+  "Interpretive Studies",
+  "Critical Approaches",
+  "Academic Perspectives",
+  "Scholarly Analysis",
+  "Literary Commentary",
+  "Critical Insights",
+  "Academic Review",
+  "Scholarly Commentary",
+  "Critical Examination",
+  "Literary Perspectives",
+  "Academic Interpretation",
+  "Critical Theory Applied",
+  "Postmodern Reading",
+  "Feminist Analysis",
+];
+
+export function* generateAllClassicAnalysisTitles(): IterableIterator<string> {
+  // Generate combinations of prefix + classic title + suffix
+  for (const prefix of classicTitlePrefixes) {
+    for (const classic of classicTitles) {
+      for (const suffix of classicTitleSuffixes) {
+        yield `${prefix} ${classic.title}: ${suffix}`;
+      }
+    }
+  }
+}
