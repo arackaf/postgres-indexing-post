@@ -1,4 +1,4 @@
-type ClassicTitle = {
+export type ClassicTitle = {
   title: string;
   author: string;
 };
@@ -203,7 +203,7 @@ export const classicTitles: ClassicTitle[] = [
   { title: "The Wind-Up Bird Chronicle", author: "Haruki Murakami" },
 ];
 
-export const classicTitlePrefixes = [
+const classicTitlePrefixes = [
   "Analyzing",
   "Understanding",
   "Interpreting",
@@ -255,7 +255,7 @@ export const classicTitlePrefixes = [
   "Historicizing",
 ];
 
-export const classicTitleSuffixes = [
+const classicTitleSuffixes = [
   "A Critical Review",
   "An Academic Analysis",
   "A Scholarly Examination",

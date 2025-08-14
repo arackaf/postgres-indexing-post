@@ -407,7 +407,7 @@ const suffixes = [
   "Untold Tales",
 ];
 
-export function* generateAllTitles(): IterableIterator<string> {
+export function* generateAllHistoryTitles(): IterableIterator<string> {
   // Combined loop for all categories
   for (const arr of [historicalFigures, historicalEvents, timePeriods, regions]) {
     for (const prefix of prefixes) {

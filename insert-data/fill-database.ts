@@ -4,40 +4,22 @@ import { db } from "../drizzle/db";
 import { publishers } from "../drizzle/schema";
 import { BookInserter } from "./book-inserter";
 
-import { generateAllTitles } from "./static-data/history-titles";
-import { newAuthor } from "./static-data/names";
+import { generateAllHistoryTitles } from "./static-data/history-titles";
+import { ClassicTitle, classicTitles, generateAllClassicAnalysisTitles } from "./static-data/classic-titles";
+import { randomAuthor } from "./static-data/names";
 import {
   historyPublishers as historyPublisherNames,
   techPublishers as techPublisherNames,
   cookingPublishers as cookingPublisherNames,
   miscPublishers as miscPublisherNames,
+  classicsPublishers as classicPublisherNames,
 } from "./static-data/publishers";
+import { generateRandomISBN, generateRandomPages, generateRandomPublicationDate } from "./util";
+import { generateAllMiscAnalysisTitles } from "./static-data/misc-titles";
+import { generateAllCookingTitles } from "./static-data/cooking-titles";
+import { generateAllTechTitles } from "./static-data/tech-titles";
 
 type Publisher = InferSelectModel<typeof publishers>;
-
-function generateRandomISBN(): string {
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let isbn = "";
-  for (let i = 0; i < 10; i++) {
-    isbn += letters.charAt(Math.floor(Math.random() * letters.length));
-  }
-  return isbn;
-}
-
-function generateRandomPages(): number {
-  return Math.floor(Math.random() * (700 - 100 + 1)) + 100; // between 100 and 700
-}
-
-function generateRandomPublicationDate(): string {
-  const now = new Date();
-  const thirtyYearsAgo = new Date(now.getFullYear() - 30, now.getMonth(), now.getDate());
-  const oneYearFuture = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
-
-  const randomTime = thirtyYearsAgo.getTime() + Math.random() * (oneYearFuture.getTime() - thirtyYearsAgo.getTime());
-
-  const randomDate = new Date(randomTime);
-  return randomDate.toISOString().split("T")[0]; // Return YYYY-MM-DD format
-}
 
 async function insertPublishers(publisherNames: string[]): Promise<Publisher[]> {
   const publisherValues = publisherNames.map((name) => ({ name }));
@@ -45,14 +27,49 @@ async function insertPublishers(publisherNames: string[]): Promise<Publisher[]> 
   return await db.insert(publishers).values(publisherValues).returning();
 }
 
+type BookTitleAuthor = {
+  title: string;
+  author: string;
+  publisher: number;
+};
+function* bookCoreGenerator(titles: IterableIterator<string>, publishers: Publisher[]): IterableIterator<BookTitleAuthor> {
+  for (const title of titles) {
+    yield {
+      title,
+      publisher: publishers[Math.floor(Math.random() * publishers.length)].id,
+      author: randomAuthor(),
+    };
+  }
+}
+function* classicBookGenerator(books: ClassicTitle[], publishers: Publisher[]): IterableIterator<BookTitleAuthor> {
+  for (const book of books) {
+    yield {
+      title: book.title,
+      publisher: publishers[Math.floor(Math.random() * publishers.length)].id,
+      author: book.author,
+    };
+  }
+}
+
 export async function fillDatabase() {
   const historyPublishers = await insertPublishers(historyPublisherNames);
-  const [timelessHistory] = await insertPublishers(["Timeless History"]);
+  const [timelessHistoryPublishing] = await insertPublishers(["Timeless History"]);
+  const classicPublishers = await insertPublishers(classicPublisherNames);
   const techPublishers = await insertPublishers(techPublisherNames);
+  const cookingPublishers = await insertPublishers(cookingPublisherNames);
+  const [frontendMastersPublishing] = await insertPublishers(["FrontendMasters Publishing"]);
+  const miscPublishers = await insertPublishers(miscPublisherNames);
 
   const bookInserter = new BookInserter();
 
-  const titles = generateAllTitles();
+  const classicBooks = classicBookGenerator(classicTitles, classicPublishers);
+  const classicAnalysisTitles = bookCoreGenerator(generateAllClassicAnalysisTitles(), classicPublishers);
+  const historyBooks = bookCoreGenerator(generateAllHistoryTitles(), historyPublishers);
+  const miscTitles = bookCoreGenerator(generateAllMiscAnalysisTitles(), miscPublishers);
+  const cookingTitles = bookCoreGenerator(generateAllCookingTitles(), cookingPublishers);
+  const techTitles = bookCoreGenerator(generateAllTechTitles(), techPublishers);
+  const timelessHistoryBooks = bookCoreGenerator(generateAllHistoryTitles(), [timelessHistoryPublishing]);
+  const frontendMastersBooks = bookCoreGenerator(generateAllTechTitles(), [frontendMastersPublishing]);
 
   for (const title of titles) {
     await bookInserter.add({
