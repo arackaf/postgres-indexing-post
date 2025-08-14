@@ -1,9 +1,19 @@
-import { generateAllTitles } from "./static-data/history-titles";
+import { InferSelectModel } from "drizzle-orm";
 
-import { newAuthor } from "./static-data/names";
 import { db } from "../drizzle/db";
 import { publishers } from "../drizzle/schema";
 import { BookInserter } from "./book-inserter";
+
+import { generateAllTitles } from "./static-data/history-titles";
+import { newAuthor } from "./static-data/names";
+import {
+  historyPublishers as historyPublisherNames,
+  techPublishers as techPublisherNames,
+  cookingPublishers as cookingPublisherNames,
+  miscPublishers as miscPublisherNames,
+} from "./static-data/publishers";
+
+type Publisher = InferSelectModel<typeof publishers>;
 
 function generateRandomISBN(): string {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -29,11 +39,16 @@ function generateRandomPublicationDate(): string {
   return randomDate.toISOString().split("T")[0]; // Return YYYY-MM-DD format
 }
 
+async function insertPublishers(publisherNames: string[]): Promise<Publisher[]> {
+  const publisherValues = publisherNames.map((name) => ({ name }));
+
+  return await db.insert(publishers).values(publisherValues).returning();
+}
+
 export async function fillDatabase() {
-  await db.insert(publishers).values({
-    id: 1,
-    name: "Large History Publisher",
-  });
+  const historyPublishers = await insertPublishers(historyPublisherNames);
+  const [timelessHistory] = await insertPublishers(["Timeless History"]);
+  const techPublishers = await insertPublishers(techPublisherNames);
 
   const bookInserter = new BookInserter();
 
