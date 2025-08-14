@@ -357,12 +357,27 @@ const miscTitleSuffixes = [
   "Setting the Record Straight",
 ];
 
+const editions = [
+  "1st edition",
+  "2nd edition",
+  "3rd edition",
+  "4th edition",
+  "5th edition",
+  "6th edition",
+  "7th edition",
+  "8th edition",
+  "9th edition",
+  "10th edition",
+];
+
 export function* generateAllMiscAnalysisTitles(): IterableIterator<string> {
-  // Generate combinations of prefix + misc title + suffix
+  // Generate combinations of prefix + misc title + suffix + edition
   for (const prefix of miscTitlePrefixes) {
     for (const misc of miscTitles) {
       for (const suffix of miscTitleSuffixes) {
-        yield `${prefix} ${misc}: ${suffix}`;
+        for (const edition of editions) {
+          yield `${prefix} ${misc}: ${suffix} ${edition}`;
+        }
       }
     }
   }

@@ -200,12 +200,27 @@ const cookingSuffixes = [
   "Recipe Revolution",
 ];
 
+const editions = [
+  "1st edition",
+  "2nd edition",
+  "3rd edition",
+  "4th edition",
+  "5th edition",
+  "6th edition",
+  "7th edition",
+  "8th edition",
+  "9th edition",
+  "10th edition",
+];
+
 export function* generateAllCookingTitles(): IterableIterator<string> {
-  // Generate combinations of prefix + food + suffix
+  // Generate combinations of prefix + food + suffix + edition
   for (const prefix of cookingPrefixes) {
     for (const food of foods) {
       for (const suffix of cookingSuffixes) {
-        yield `${prefix} ${food}: ${suffix}`;
+        for (const edition of editions) {
+          yield `${prefix} ${food}: ${suffix} ${edition}`;
+        }
       }
     }
   }

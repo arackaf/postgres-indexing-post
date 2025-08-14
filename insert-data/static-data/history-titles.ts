@@ -407,13 +407,28 @@ const suffixes = [
   "Untold Tales",
 ];
 
+const editions = [
+  "1st edition",
+  "2nd edition",
+  "3rd edition",
+  "4th edition",
+  "5th edition",
+  "6th edition",
+  "7th edition",
+  "8th edition",
+  "9th edition",
+  "10th edition",
+];
+
 export function* generateAllHistoryTitles(): IterableIterator<string> {
-  // Combined loop for all categories
+  // Combined loop for all categories + editions
   for (const arr of [historicalFigures, historicalEvents, timePeriods, regions]) {
     for (const prefix of prefixes) {
       for (const item of arr) {
         for (const suffix of suffixes) {
-          yield `${prefix} ${item}: ${suffix}`;
+          for (const edition of editions) {
+            yield `${prefix} ${item}: ${suffix} ${edition}`;
+          }
         }
       }
     }

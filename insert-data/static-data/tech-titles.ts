@@ -340,12 +340,27 @@ const techSuffixes = [
   "Analytics Workbook",
 ];
 
+const editions = [
+  "1st edition",
+  "2nd edition",
+  "3rd edition",
+  "4th edition",
+  "5th edition",
+  "6th edition",
+  "7th edition",
+  "8th edition",
+  "9th edition",
+  "10th edition",
+];
+
 export function* generateAllTechTitles(): IterableIterator<string> {
-  // Generate combinations of prefix + tech subject + suffix
+  // Generate combinations of prefix + tech subject + suffix + edition
   for (const prefix of techPrefixes) {
     for (const subject of techSubjects) {
       for (const suffix of techSuffixes) {
-        yield `${prefix} ${subject}: ${suffix}`;
+        for (const edition of editions) {
+          yield `${prefix} ${subject}: ${suffix} ${edition}`;
+        }
       }
     }
   }

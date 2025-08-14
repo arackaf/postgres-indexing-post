@@ -308,12 +308,27 @@ const classicTitleSuffixes = [
   "Feminist Analysis",
 ];
 
+const editions = [
+  "1st edition",
+  "2nd edition",
+  "3rd edition",
+  "4th edition",
+  "5th edition",
+  "6th edition",
+  "7th edition",
+  "8th edition",
+  "9th edition",
+  "10th edition",
+];
+
 export function* generateAllClassicAnalysisTitles(): IterableIterator<string> {
-  // Generate combinations of prefix + classic title + suffix
+  // Generate combinations of prefix + classic title + suffix + edition
   for (const prefix of classicTitlePrefixes) {
     for (const classic of classicTitles) {
       for (const suffix of classicTitleSuffixes) {
-        yield `${prefix} ${classic.title}: ${suffix}`;
+        for (const edition of editions) {
+          yield `${prefix} ${classic.title}: ${suffix} ${edition}`;
+        }
       }
     }
   }
