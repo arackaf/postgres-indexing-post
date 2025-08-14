@@ -6,7 +6,7 @@ CREATE DATABASE book_management;
 
 -- Table 2: publishers (created first since books references it)
 CREATE TABLE publishers (
-    id INT PRIMARY KEY,  -- NOT AUTO INCREMENT as requested
+    id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
 
