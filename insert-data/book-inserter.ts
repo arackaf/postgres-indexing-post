@@ -2,8 +2,8 @@ import { InferInsertModel } from "drizzle-orm";
 import { db } from "../drizzle/db";
 import { books } from "../drizzle/schema";
 
-export class BookInserter<T> {
-  private batchSize: number = 50;
+export class BookInserter {
+  private batchSize: number = 100;
   private buffer: InferInsertModel<typeof books>[] = [];
   private totalInserted: number = 0;
 
