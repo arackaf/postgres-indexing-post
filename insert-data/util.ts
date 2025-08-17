@@ -21,3 +21,16 @@ export function generateRandomPublicationDate(): string {
   const randomDate = new Date(randomTime);
   return randomDate.toISOString().split("T")[0]; // Return YYYY-MM-DD format
 }
+
+export const editions = [
+  "1st edition",
+  "2nd edition",
+  "3rd edition",
+  "4th edition",
+  "5th edition",
+  "6th edition",
+  "7th edition",
+  "8th edition",
+  "9th edition",
+  "10th edition",
+];

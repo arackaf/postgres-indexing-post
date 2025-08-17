@@ -1,3 +1,5 @@
+import { editions } from "../util";
+
 export type ClassicTitle = {
   title: string;
   author: string;
@@ -306,19 +308,6 @@ const classicTitleSuffixes = [
   "Critical Theory Applied",
   "Postmodern Reading",
   "Feminist Analysis",
-];
-
-const editions = [
-  "1st edition",
-  "2nd edition",
-  "3rd edition",
-  "4th edition",
-  "5th edition",
-  "6th edition",
-  "7th edition",
-  "8th edition",
-  "9th edition",
-  "10th edition",
 ];
 
 export function* generateAllClassicAnalysisTitles(): IterableIterator<string> {

@@ -1,3 +1,5 @@
+import { editions } from "../util";
+
 const miscTitles: string[] = [
   "The Sopranos Sessions",
   "Breaking Bad and Philosophy",
@@ -355,19 +357,6 @@ const miscTitleSuffixes = [
   "Myths and Realities",
   "Facts vs. Fiction",
   "Setting the Record Straight",
-];
-
-const editions = [
-  "1st edition",
-  "2nd edition",
-  "3rd edition",
-  "4th edition",
-  "5th edition",
-  "6th edition",
-  "7th edition",
-  "8th edition",
-  "9th edition",
-  "10th edition",
 ];
 
 export function* generateAllMiscAnalysisTitles(): IterableIterator<string> {

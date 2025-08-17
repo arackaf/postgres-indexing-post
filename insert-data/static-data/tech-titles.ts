@@ -1,6 +1,8 @@
 // Tech Book Title Generator
 // Generates large amounts of unique tech book titles through systematic combinations
 
+import { editions } from "../util";
+
 const techPrefixes = [
   "Learning",
   "Mastering",
@@ -338,19 +340,6 @@ const techSuffixes = [
   "AI-Powered Solutions",
   "Data-Driven Approach",
   "Analytics Workbook",
-];
-
-const editions = [
-  "1st edition",
-  "2nd edition",
-  "3rd edition",
-  "4th edition",
-  "5th edition",
-  "6th edition",
-  "7th edition",
-  "8th edition",
-  "9th edition",
-  "10th edition",
 ];
 
 export function* generateAllTechTitles(): IterableIterator<string> {
