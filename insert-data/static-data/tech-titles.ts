@@ -1,7 +1,7 @@
 // Tech Book Title Generator
 // Generates large amounts of unique tech book titles through systematic combinations
 
-import { editions } from "../util";
+import { editions, bookTypes } from "../util";
 
 const techPrefixes = [
   "Learning",
@@ -343,12 +343,14 @@ const techSuffixes = [
 ];
 
 export function* generateAllTechTitles(): IterableIterator<string> {
-  // Generate combinations of prefix + tech subject + suffix + edition
+  // Generate combinations of prefix + tech subject + suffix + edition + book type
   for (const prefix of techPrefixes) {
     for (const subject of techSubjects) {
       for (const suffix of techSuffixes) {
         for (const edition of editions) {
-          yield `${prefix} ${subject}: ${suffix} ${edition}`;
+          for (const bookType of bookTypes) {
+            yield `${prefix} ${subject}: ${suffix} ${edition} ${bookType}`;
+          }
         }
       }
     }

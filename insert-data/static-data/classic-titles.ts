@@ -1,4 +1,4 @@
-import { editions } from "../util";
+import { editions, bookTypes } from "../util";
 
 export type ClassicTitle = {
   title: string;
@@ -311,12 +311,14 @@ const classicTitleSuffixes = [
 ];
 
 export function* generateAllClassicAnalysisTitles(): IterableIterator<string> {
-  // Generate combinations of prefix + classic title + suffix + edition
+  // Generate combinations of prefix + classic title + suffix + edition + book type
   for (const prefix of classicTitlePrefixes) {
     for (const classic of classicTitles) {
       for (const suffix of classicTitleSuffixes) {
         for (const edition of editions) {
-          yield `${prefix} ${classic.title}: ${suffix} ${edition}`;
+          for (const bookType of bookTypes) {
+            yield `${prefix} ${classic.title}: ${suffix} ${edition} ${bookType}`;
+          }
         }
       }
     }

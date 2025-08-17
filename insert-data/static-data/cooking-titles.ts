@@ -1,7 +1,7 @@
 // Cooking Book Title Generator
 // Generates large amounts of unique cookbook titles through systematic combinations
 
-import { editions } from "../util";
+import { editions, bookTypes } from "../util";
 
 const cookingPrefixes = [
   "How to Cook",
@@ -203,12 +203,14 @@ const cookingSuffixes = [
 ];
 
 export function* generateAllCookingTitles(): IterableIterator<string> {
-  // Generate combinations of prefix + food + suffix + edition
+  // Generate combinations of prefix + food + suffix + edition + book type
   for (const prefix of cookingPrefixes) {
     for (const food of foods) {
       for (const suffix of cookingSuffixes) {
         for (const edition of editions) {
-          yield `${prefix} ${food}: ${suffix} ${edition}`;
+          for (const bookType of bookTypes) {
+            yield `${prefix} ${food}: ${suffix} ${edition} ${bookType}`;
+          }
         }
       }
     }

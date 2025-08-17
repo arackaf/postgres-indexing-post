@@ -34,3 +34,5 @@ export const editions = [
   "9th edition",
   "10th edition",
 ];
+
+export const bookTypes = ["Hardcover", "Paperback", "Kindle"];

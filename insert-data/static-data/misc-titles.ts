@@ -1,4 +1,4 @@
-import { editions } from "../util";
+import { editions, bookTypes } from "../util";
 
 const miscTitles: string[] = [
   "The Sopranos Sessions",
@@ -360,12 +360,14 @@ const miscTitleSuffixes = [
 ];
 
 export function* generateAllMiscAnalysisTitles(): IterableIterator<string> {
-  // Generate combinations of prefix + misc title + suffix + edition
+  // Generate combinations of prefix + misc title + suffix + edition + book type
   for (const prefix of miscTitlePrefixes) {
     for (const misc of miscTitles) {
       for (const suffix of miscTitleSuffixes) {
         for (const edition of editions) {
-          yield `${prefix} ${misc}: ${suffix} ${edition}`;
+          for (const bookType of bookTypes) {
+            yield `${prefix} ${misc}: ${suffix} ${edition} ${bookType}`;
+          }
         }
       }
     }
