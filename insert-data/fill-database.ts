@@ -97,6 +97,20 @@ export async function fillDatabase() {
         }
 
         const book = result.value;
+
+        // 10% of the time, randomly apply one of two promotion settings
+        const shouldApplyPromotion = Math.random() < 0.1;
+        let hasActivePromotion = false;
+        let eligibleForPromotion = false;
+
+        if (shouldApplyPromotion) {
+          if (Math.random() < 0.5) {
+            hasActivePromotion = true;
+          } else {
+            eligibleForPromotion = true;
+          }
+        }
+
         await bookInserter.add({
           isbn: generateRandomISBN(),
           author: book.author,
@@ -104,8 +118,8 @@ export async function fillDatabase() {
           publisher: book.publisher,
           publicationDate: generateRandomPublicationDate(),
           pages: generateRandomPages(),
-          hasActivePromotion: false,
-          eligibleForPromotion: false,
+          hasActivePromotion,
+          eligibleForPromotion,
         });
       }
 
