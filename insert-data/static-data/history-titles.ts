@@ -1,7 +1,7 @@
 // History Book Title Generator
 // Generates large amounts of unique book titles through systematic combinations
 
-import { editions, bookTypes } from "../util";
+import { editions, bookTypes, getRandomCharacter } from "../util";
 
 const prefixes = [
   "The Complete History of",
@@ -417,7 +417,7 @@ export function* generateAllHistoryTitles(): IterableIterator<string> {
         for (const suffix of suffixes) {
           for (const edition of editions) {
             for (const bookType of bookTypes) {
-              yield `${prefix} ${item}: ${suffix} ${edition} ${bookType}`;
+              yield `${getRandomCharacter()}${prefix} ${item}: ${suffix} ${edition} ${bookType}`;
             }
           }
         }

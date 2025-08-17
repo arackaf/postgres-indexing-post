@@ -1,4 +1,4 @@
-import { editions, bookTypes } from "../util";
+import { editions, bookTypes, getRandomCharacter } from "../util";
 
 export type ClassicTitle = {
   title: string;
@@ -317,7 +317,7 @@ export function* generateAllClassicAnalysisTitles(): IterableIterator<string> {
       for (const suffix of classicTitleSuffixes) {
         for (const edition of editions) {
           for (const bookType of bookTypes) {
-            yield `${prefix} ${classic.title}: ${suffix} ${edition} ${bookType}`;
+            yield `${getRandomCharacter()}${prefix} ${classic.title}: ${suffix} ${edition} ${bookType}`;
           }
         }
       }
