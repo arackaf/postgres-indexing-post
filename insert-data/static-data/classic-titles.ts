@@ -317,7 +317,7 @@ export function* generateAllClassicAnalysisTitles(): IterableIterator<string> {
       for (const suffix of classicTitleSuffixes) {
         for (const edition of editions) {
           for (const bookType of bookTypes) {
-            yield `${getRandomCharacter()}${prefix} ${classic.title}: ${suffix} ${edition} ${bookType}`;
+            yield `${getRandomCharacter()} ${prefix} ${classic.title}: ${suffix} ${edition} ${bookType}`;
           }
         }
       }

@@ -417,7 +417,7 @@ export function* generateAllHistoryTitles(): IterableIterator<string> {
         for (const suffix of suffixes) {
           for (const edition of editions) {
             for (const bookType of bookTypes) {
-              yield `${getRandomCharacter()}${prefix} ${item}: ${suffix} ${edition} ${bookType}`;
+              yield `${getRandomCharacter()} ${prefix} ${item}: ${suffix} ${edition} ${bookType}`;
             }
           }
         }

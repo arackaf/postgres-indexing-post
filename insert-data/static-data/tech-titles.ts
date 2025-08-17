@@ -349,7 +349,7 @@ export function* generateAllTechTitles(): IterableIterator<string> {
       for (const suffix of techSuffixes) {
         for (const edition of editions) {
           for (const bookType of bookTypes) {
-            yield `${getRandomCharacter()}${prefix} ${subject}: ${suffix} ${edition} ${bookType}`;
+            yield `${getRandomCharacter()} ${prefix} ${subject}: ${suffix} ${edition} ${bookType}`;
           }
         }
       }

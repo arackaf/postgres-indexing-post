@@ -3,7 +3,7 @@ import { db } from "../drizzle/db";
 import { books } from "../drizzle/schema";
 
 export class BookInserter {
-  private batchSize: number = 100;
+  private batchSize: number = 500;
   private buffer: InferInsertModel<typeof books>[] = [];
   private totalInserted: number = 0;
 
@@ -24,6 +24,7 @@ export class BookInserter {
     this.totalInserted += this.buffer.length;
 
     console.log(`Total books inserted: ${this.totalInserted.toLocaleString()}`);
+
     this.buffer.length = 0;
   }
 }

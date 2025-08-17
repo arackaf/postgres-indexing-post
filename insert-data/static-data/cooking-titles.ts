@@ -209,7 +209,7 @@ export function* generateAllCookingTitles(): IterableIterator<string> {
       for (const suffix of cookingSuffixes) {
         for (const edition of editions) {
           for (const bookType of bookTypes) {
-            yield `${getRandomCharacter()}${prefix} ${food}: ${suffix} ${edition} ${bookType}`;
+            yield `${getRandomCharacter()} ${prefix} ${food}: ${suffix} ${edition} ${bookType}`;
           }
         }
       }
