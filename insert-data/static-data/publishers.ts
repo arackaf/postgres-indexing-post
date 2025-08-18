@@ -1,6 +1,6 @@
-// Publisher suffixes for cross-joining with base publisher names
+const prefixes = ["The", "New", "First", "Great", "Big"];
+
 const suffixes = [
-  // Legal/Corporate suffixes
   "Limited",
   "Ltd",
   "LLC",
@@ -752,8 +752,19 @@ const _classicsPublishers = [
   "Noble Spirit Publishing",
 ];
 
-export const historyPublishers = _historyPublishers.flatMap(pub => suffixes.map(sfx => pub + " " + sfx));
-export const cookingPublishers = _cookingPublishers.flatMap(pub => suffixes.map(sfx => pub + " " + sfx));
-export const techPublishers = _techPublishers.flatMap(pub => suffixes.map(sfx => pub + " " + sfx));
-export const miscPublishers = _miscPublishers.flatMap(pub => suffixes.map(sfx => pub + " " + sfx));
-export const classicsPublishers = _classicsPublishers.flatMap(pub => suffixes.map(sfx => pub + " " + sfx));
+// Export cross-joined publisher arrays with prefixes and suffixes
+export const historyPublishers = prefixes.flatMap(prefix =>
+  _historyPublishers.flatMap(pub => suffixes.map(suffix => prefix + " " + pub + " " + suffix))
+);
+export const cookingPublishers = prefixes.flatMap(prefix =>
+  _cookingPublishers.flatMap(pub => suffixes.map(suffix => prefix + " " + pub + " " + suffix))
+);
+export const techPublishers = prefixes.flatMap(prefix =>
+  _techPublishers.flatMap(pub => suffixes.map(suffix => prefix + " " + pub + " " + suffix))
+);
+export const miscPublishers = prefixes.flatMap(prefix =>
+  _miscPublishers.flatMap(pub => suffixes.map(suffix => prefix + " " + pub + " " + suffix))
+);
+export const classicsPublishers = prefixes.flatMap(prefix =>
+  _classicsPublishers.flatMap(pub => suffixes.map(suffix => prefix + " " + pub + " " + suffix))
+);
