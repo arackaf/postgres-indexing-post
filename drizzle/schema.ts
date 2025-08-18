@@ -19,7 +19,7 @@ export const books = pgTable(
     hasActivePromotion: boolean("has_active_promotion").default(false).notNull(),
     eligibleForPromotion: boolean("eligible_for_promotion").default(true).notNull(),
   },
-  (table) => [
+  table => [
     foreignKey({
       columns: [table.publisher],
       foreignColumns: [publishers.id],
@@ -37,7 +37,7 @@ export const activePromotions = pgTable(
     startDate: date("start_date").notNull(),
     endDate: date("end_date").notNull(),
   },
-  (table) => [
+  table => [
     foreignKey({
       columns: [table.book],
       foreignColumns: [books.id],

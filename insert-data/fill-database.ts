@@ -22,7 +22,7 @@ import { generateAllTechTitles } from "./static-data/tech-titles";
 type Publisher = InferSelectModel<typeof publishers>;
 
 async function insertPublishers(publisherNames: string[]): Promise<Publisher[]> {
-  const publisherValues = publisherNames.map((name) => ({ name }));
+  const publisherValues = publisherNames.map(name => ({ name }));
 
   return await db.insert(publishers).values(publisherValues).returning();
 }
@@ -32,7 +32,10 @@ type BookTitleAuthor = {
   author: string;
   publisher: number;
 };
-function* bookCoreGenerator(titles: IterableIterator<string>, publishers: Publisher[]): IterableIterator<BookTitleAuthor> {
+function* bookCoreGenerator(
+  titles: IterableIterator<string>,
+  publishers: Publisher[]
+): IterableIterator<BookTitleAuthor> {
   for (const title of titles) {
     yield {
       title,
