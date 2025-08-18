@@ -34,14 +34,20 @@ type BookTitleAuthor = {
 };
 function* bookCoreGenerator(
   titles: IterableIterator<string>,
-  publishers: Publisher[]
+  publishers: Publisher[],
+  limit?: number
 ): IterableIterator<BookTitleAuthor> {
+  let numberRemainingToInsert = typeof limit === "number" ? limit : Infinity;
   for (const title of titles) {
     yield {
       title,
       publisher: publishers[Math.floor(Math.random() * publishers.length)].id,
       author: randomAuthor(),
     };
+
+    if (--numberRemainingToInsert <= 0) {
+      return;
+    }
   }
 }
 function* classicBookGenerator(books: ClassicTitle[], publishers: Publisher[]): IterableIterator<BookTitleAuthor> {
@@ -71,8 +77,8 @@ export async function fillDatabase() {
   const miscTitles = bookCoreGenerator(generateAllMiscAnalysisTitles(), miscPublishers);
   const cookingTitles = bookCoreGenerator(generateAllCookingTitles(), cookingPublishers);
   const techTitles = bookCoreGenerator(generateAllTechTitles(), techPublishers);
-  const timelessHistoryBooks = bookCoreGenerator(generateAllHistoryTitles(), [timelessHistoryPublishing]);
-  const frontendMastersBooks = bookCoreGenerator(generateAllTechTitles(), [frontendMastersPublishing]);
+  const timelessHistoryBooks = bookCoreGenerator(generateAllHistoryTitles(), [timelessHistoryPublishing], 1_521_486);
+  const frontendMastersBooks = bookCoreGenerator(generateAllTechTitles(), [frontendMastersPublishing], 2_081_190);
 
   const allBookGenerators = [
     classicBooks,
