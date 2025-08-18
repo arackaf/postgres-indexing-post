@@ -1,4 +1,89 @@
-export const historyPublishers = [
+// Publisher suffixes for cross-joining with base publisher names
+const suffixes = [
+  // Legal/Corporate suffixes
+  "Limited",
+  "Ltd",
+  "LLC",
+  "Incorporated",
+  "Inc",
+  "Corporation",
+  "Corp",
+  "Company",
+  "Co",
+  "LLP",
+  "LP",
+  "Group",
+  "Holdings",
+  "Enterprises",
+  "Associates",
+  "Partners",
+  "& Associates",
+  "& Partners",
+  "& Co",
+  "& Sons",
+  "& Daughters",
+  "& Company",
+  "International",
+  "Global",
+  "Worldwide",
+  "Universal",
+  // Creative/Descriptive suffixes
+  "House",
+  "Publishing House",
+  "Books",
+  "Publications",
+  "Publishers",
+  "Press",
+  "Media",
+  "Ventures",
+  "Solutions",
+  "Works",
+  "Studio",
+  "Workshop",
+  "Academy",
+  "Institute",
+  "Foundation",
+  "Society",
+  "Union",
+  "Alliance",
+  "Collective",
+  "Network",
+  "Guild",
+  "Circle",
+  "Hub",
+  "Labs",
+  "Studios",
+  "Creative",
+  "Digital",
+  "Online",
+  "Interactive",
+  "Modern",
+  "Classic",
+  "Premium",
+  "Elite",
+  "Professional",
+  "Expert",
+  "Master",
+  "Pro",
+  "Plus",
+  "Advanced",
+  "Superior",
+  "Prime",
+  "Select",
+  "Exclusive",
+  "Signature",
+  "Deluxe",
+  "Special",
+  "Custom",
+  "Bespoke",
+  "Artisan",
+  "Craft",
+  "Boutique",
+  "Niche",
+  "Specialty",
+];
+
+const _historyPublishers = [
   "Chronicle Academic Press",
   "Heritage University Publishing",
   "Meridian Historical Studies",
@@ -135,7 +220,7 @@ export const historyPublishers = [
   "Traditional Tales Publishers",
 ];
 
-export const cookingPublishers = [
+const _cookingPublishers = [
   "Culinary Arts Publishing",
   "Kitchen Classics Press",
   "Gourmet Books International",
@@ -273,7 +358,7 @@ export const cookingPublishers = [
   "Seasonal Cooking Publishers",
 ];
 
-export const techPublishers = [
+const _techPublishers = [
   "Code Craft Publishing",
   "Technical Mastery Press",
   "Digital Architecture Books",
@@ -404,7 +489,7 @@ export const techPublishers = [
   "Hardware Programming Publishers",
 ];
 
-export const miscPublishers = [
+const _miscPublishers = [
   // Academic & University Publishers
   "Academic Press International",
   "University Publishing House",
@@ -528,7 +613,7 @@ export const miscPublishers = [
   "Creative Minds Books",
 ];
 
-export const classicsPublishers = [
+const _classicsPublishers = [
   "Everyman's Library",
   "Oxford Classical Press",
   "Penguin Classics",
@@ -666,3 +751,9 @@ export const classicsPublishers = [
   "Lofty Classics",
   "Noble Spirit Publishing",
 ];
+
+export const historyPublishers = _historyPublishers.flatMap(pub => suffixes.map(sfx => pub + " " + sfx));
+export const cookingPublishers = _cookingPublishers.flatMap(pub => suffixes.map(sfx => pub + " " + sfx));
+export const techPublishers = _techPublishers.flatMap(pub => suffixes.map(sfx => pub + " " + sfx));
+export const miscPublishers = _miscPublishers.flatMap(pub => suffixes.map(sfx => pub + " " + sfx));
+export const classicsPublishers = _classicsPublishers.flatMap(pub => suffixes.map(sfx => pub + " " + sfx));
